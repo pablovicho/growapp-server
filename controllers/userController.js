@@ -9,7 +9,7 @@ exports.create = async (req, res) => {
 		nombre,
 		email,
 		password,
-        terapeuta
+        terapeuta,
 	 } = req.body
 
 	// 2A. REALIZAR EL PROCESO ASÍNCRONO
@@ -22,9 +22,9 @@ exports.create = async (req, res) => {
 		// 4. CREAR USUARIO EN BASE DE DATOS
 		const newUser = await User.create({
 			nombre,
-			apellido,
+			email,
+			password: hashedPassword,
 			terapeuta,
-			password: hashedPassword
 		})
 
 		// 5. AUTENTICACIÓN CON TOKENS
@@ -138,7 +138,7 @@ exports.login = async (req, res) => {
 // VERIFICAR USUARIO
 // CUANDO ESTAMOS ACCEDIENDO A DIFERENTES RUTAS (GUITARRAS COMO TIENDAS) PREGUNTAR SI EL USUARIO TIENE PERMISOS O NO. ENTONCES, PARA CONFIRMARLO, SE LE PIDE SU TOKEN.
 // UNA RUTA QUE PIDE TOKENS PARA VERIFICAR
-exports.verifyToken = async (req, res) => {
+exports.verifyingToken = async (req, res) => {
 
 
 	try {
@@ -160,5 +160,57 @@ exports.verifyToken = async (req, res) => {
 				msg: "Hubo un error con el usuario"
 			})
 	}
+}
 
+exports.edit = async(req,res) => {
+    const {id} = req.params
+    const {nombre, email, password, terapeuta} = req.body
+    try {
+        const updatedGuitar = await Guitar.findByIdAndUpdate(
+            id,
+            {nombre, email, password, terapeuta},
+            {new: true})
+
+            res.json({
+                msg:"Guitarra actualizada con éxito",
+                data: updatedGuitar
+            })
+        } catch(error){
+            res.status(500).json({
+                msg:"Hubo un error en la actualización del usuario",
+                error
+            })
+        }
+}
+
+exports.delete = async(req,res) => {
+    const {id} = req.params
+    try {
+        const deletedUser = await User.findByIdAndDelete({_id:id})
+        res.json({
+            msg:"Usuario borrado con éxito",
+            data:deletedUser
+        })
+    } catch(error){
+        res.status(500).json({
+            msg:"Hubo un error en la actualización del usuario",
+            error
+        })
+    }
+}
+
+exports.readOne = async(req,res) => {
+    const {id} = req.params
+    try {
+        const user = await User.findById(id)
+        res.json({
+            msg:"Usuario obtenido con éxito",
+            data:user
+        })
+    } catch(error) {
+        res.status(500).json({
+        msg:"hubo un error obteniendo los datos",
+        error:error
+    })
+}
 }

@@ -9,8 +9,18 @@ const connectDB = require('./config/db')
 // BASE DE DATOS
 connectDB()
 
+//TEMP¨CREAR OPCIONES PARA CORS
+
+const corsOptions ={ //cambiar para despliegue
+    origin:'http://localhost:3000',
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+
 // HABILITAR CORS (ACCESOS DE AMBIENTES DE DESARROLLO DE TERCEROS)
-app.use(cors())
+app.use(cors(corsOptions));
+
+
 // TODAS LAS PETICIONES Y RESPUESTAS SE MANEJAN EN PROTOLOCO JSON
 app.use(express.json())
 

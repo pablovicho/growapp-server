@@ -16,8 +16,7 @@ const UserSchema = mongoose.Schema({
         required: true
     },
     terapeuta: {
-        type: Boolean,
-        default: false
+        type: Boolean
     }
 })
 

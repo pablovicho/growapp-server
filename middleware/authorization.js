@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken")
 const decrypt = async (req, res, next) => {
 	// CAPTURAR EL TOKEN Y GUARDARLO EN UNA VARIABLE
+	// res.header()('Access-Control-Allow-Origin', '*')
 	const token = req.header("x-auth-token")
 	// SI NO HAY TOKEN
 	if(! token){
