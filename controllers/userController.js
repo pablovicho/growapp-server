@@ -136,7 +136,7 @@ exports.login = async (req, res) => {
 }
 
 // VERIFICAR USUARIO
-// CUANDO ESTAMOS ACCEDIENDO A DIFERENTES RUTAS (GUITARRAS COMO TIENDAS) PREGUNTAR SI EL USUARIO TIENE PERMISOS O NO. ENTONCES, PARA CONFIRMARLO, SE LE PIDE SU TOKEN.
+// CUANDO ESTAMOS ACCEDIENDO A DIFERENTES RUTAS PREGUNTAR SI EL USUARIO TIENE PERMISOS O NO. ENTONCES, PARA CONFIRMARLO, SE LE PIDE SU TOKEN.
 // UNA RUTA QUE PIDE TOKENS PARA VERIFICAR
 exports.verifyingToken = async (req, res) => {
 
@@ -164,16 +164,17 @@ exports.verifyingToken = async (req, res) => {
 
 exports.edit = async(req,res) => {
     const {id} = req.params
-    const {nombre, email, password, terapeuta} = req.body
+    const {nombre, email, terapeuta} = req.body
+	const findUser = await User.findById(id);
     try {
-        const updatedGuitar = await Guitar.findByIdAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
             id,
-            {nombre, email, password, terapeuta},
+            {nombre, email, password:findUser.password, terapeuta},
             {new: true})
 
             res.json({
-                msg:"Guitarra actualizada con éxito",
-                data: updatedGuitar
+                msg:"Usuario actualizado con éxito",
+                data: updatedUser
             })
         } catch(error){
             res.status(500).json({

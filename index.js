@@ -26,6 +26,7 @@ app.use(express.json())
 
 // 3. RUTAS
 app.use("/users", require("./routes/users"))
+app.use("/moods", require("./routes/moods"))
 
 // 4. SERVER
 app.listen(process.env.PORT, () => {
