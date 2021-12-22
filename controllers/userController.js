@@ -166,6 +166,7 @@ exports.edit = async(req,res) => {
     const {id} = req.params
     const {nombre, email, terapeuta} = req.body
 	const findUser = await User.findById(id);
+	
     try {
         const updatedUser = await User.findByIdAndUpdate(
             id,

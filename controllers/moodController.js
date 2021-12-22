@@ -8,6 +8,7 @@ exports.create = async (req, res) => {
 		moodEntry,
 		comment,
 	 } = req.body
+     console.log(req.body)
 
      const date = new Date()
 
