@@ -12,7 +12,7 @@ connectDB()
 //TEMP¨CREAR OPCIONES PARA CORS
 
 const corsOptions ={ //cambiar para despliegue
-    origin:'http://localhost:3000',
+    origin:'https://eager-kare-64a130.netlify.app',
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
