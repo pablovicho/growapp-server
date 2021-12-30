@@ -110,7 +110,7 @@ exports.login = async (req, res) => {
 			payload,
 			process.env.SECRET,
 			{
-				expiresIn: 360000
+				expiresIn: 36000
 			},
 			(error, token) => {
 				if(error) throw error
@@ -121,9 +121,7 @@ exports.login = async (req, res) => {
 				})
 			}
 		)
-		
 		return
-
 
 	} catch (error) {
 		console.log(error)
@@ -142,20 +140,15 @@ exports.verifyingToken = async (req, res) => {
 
 
 	try {
-		
 		// 1. BUSCAR EL ID DEL USUARIO (DEL TOKEN ABIERTO) EN BASE DE DATOS
-
 		const foundUser = await User.findById(req.user.id).select("-password")
 
 		return res.json({
 			msg: "Datos de usuario encontrados.",
 			data: foundUser
 		})
-
-
 	} catch (error) {
 			console.log(error)
-
 			res.status(500).json({
 				msg: "Hubo un error con el usuario"
 			})

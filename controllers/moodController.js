@@ -4,24 +4,18 @@ const Mood		= require("./../models/Mood")
 // CREAR UN MOOD
 exports.create = async (req, res) => {
 	// 1. OBTENER DATOS DEL FORMULARIO (REQ)
-	const { 
-		moodEntry,
-		comment,
-	 } = req.body
-     console.log(req.body)
-
-     const date = new Date()
+	const {moodEntry, comment, userId} = req.body
+// console.log(req)
+    const date = new Date()
 
 	// 2A. REALIZAR EL PROCESO ASÍNCRONO
 	try {
-		
-		// 3. GENERAR PASSWORD PARA BASE DE DATOS
-		
-		// 4. CREAR MOOD EN BASE DE DATOS
+		// CREAR MOOD EN BASE DE DATOS
 		const newMood = await Mood.create({
 			moodEntry,
-		    comment,
-            date
+		    comment,    
+            date,
+            userId
 		})
 
 	//devolver una respuesta en formato json
