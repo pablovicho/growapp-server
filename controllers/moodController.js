@@ -1,5 +1,6 @@
 const jwt		= require("jsonwebtoken")
 const Mood		= require("./../models/Mood")
+const moment    = require("moment")
 
 // CREAR UN MOOD
 exports.create = async (req, res) => {
@@ -7,6 +8,8 @@ exports.create = async (req, res) => {
 	const {moodEntry, comment, userId} = req.body
 // console.log(req)
     const date = new Date()
+    const month= moment().format("MMM")
+      const day= moment().format("DD")
 
 	// 2A. REALIZAR EL PROCESO ASÍNCRONO
 	try {
@@ -15,7 +18,9 @@ exports.create = async (req, res) => {
 			moodEntry,
 		    comment,    
             date,
-            userId
+            userId,
+            month,
+            day
 		})
 
 	//devolver una respuesta en formato json

@@ -17,6 +17,12 @@ const moodSchema = mongoose.Schema({
     },
     userId: {
         type: String
+    },
+    month: {
+        type: String
+    },
+    day: {
+        type: String
     }
 })
 
