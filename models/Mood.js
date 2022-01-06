@@ -23,6 +23,12 @@ const moodSchema = mongoose.Schema({
     },
     day: {
         type: String
+    },
+    gratitude: {
+        type: String
+    },
+    selfCare: {
+        type: String
     }
 })
 

@@ -5,10 +5,10 @@ const moment    = require("moment")
 // CREAR UN MOOD
 exports.create = async (req, res) => {
 	// 1. OBTENER DATOS DEL FORMULARIO (REQ)
-	const {moodEntry, comment, userId} = req.body
+	const {moodEntry, comment, userId, gratitude, selfCare} = req.body
 // console.log(req)
     const date = new Date()
-    const month= moment().format("MMM")
+    const month= moment().format("MM")
       const day= moment().format("DD")
 
 	// 2A. REALIZAR EL PROCESO ASÍNCRONO
@@ -20,7 +20,9 @@ exports.create = async (req, res) => {
             date,
             userId,
             month,
-            day
+            day,
+            gratitude,
+            selfCare
 		})
 
 	//devolver una respuesta en formato json
@@ -62,7 +64,7 @@ exports.edit = async(req,res) => {
     try {
         const updatedMood = await Mood.findByIdAndUpdate(
             id,
-            {moodEntry, comment}, //también necesito traer la fecha, cierto? pero sin editarla
+            {moodEntry, comment, gratitude, selfCare}, //también necesito traer la fecha, cierto? pero sin editarla
             {new: true})
 
             res.json({

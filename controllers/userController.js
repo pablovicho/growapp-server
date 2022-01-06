@@ -69,7 +69,6 @@ exports.create = async (req, res) => {
 // INICIAR SESIÓN
 // AUTENTICAR QUE LA PERSONA PASE SU EMAIL Y CONTRASEÑA. COINCIDAN. Y SE LE ENVÍA UN TOKEN.
 exports.login = async (req, res) => {
-
 	// 1. OBTENER EL EMAIL Y EL PASSWORD DEL FORMULARIO (JSON)
 	const { email, password } = req.body
 
@@ -84,7 +83,7 @@ exports.login = async (req, res) => {
 			})
 		}
 
-		// 4. SI TODO OK, EL USUARIO FUE ENCONTRADO, ENTONCES, EVALUAMOS LA CONTRASEÑA.
+		// 4. SI TODO VA BIEN, EL USUARIO FUE ENCONTRADO, ENTONCES, EVALUAMOS LA CONTRASEÑA.
 		const verifiedPass = await bcryptjs.compare(password, foundUser.password)
 
 		// 5. VALIDACIÓN - SI EL PASSWORD NO COINCIDE...
